@@ -32,6 +32,6 @@ document.getElementById('submit').addEventListener('click', () => {
 
     } catch (error) {
         alert(error.message);
-        window.location.href = "index.html";
+        window.location.href = "/gaugeswatch/";
     }
 });
