@@ -1,38 +1,37 @@
-// get elements
+// Get elements
 const stitchCount = document.getElementById('stitchCount');
 const orgWidth = document.getElementById('orgWidth');
 const desWidth = document.getElementById('desWidth');
 
 document.getElementById('submit').addEventListener('click', () => {
-    // convert input values to numbers
-    const stCount = Number(stitchCount.value);
-    const oWidth = Number(orgWidth.value);
-    const dWidth = Number(desWidth.value);
+    try {
+        // Convert input values to numbers
+        const stCount = Number(stitchCount.value);
+        const oWidth = Number(orgWidth.value);
+        const dWidth = Number(desWidth.value);
 
-    // calculate
-    const stPerCM = stCount / oWidth;
-    const newStitchCount = Math.round(stPerCM * dWidth);
-
-    // check for invalid input
-    function validateInput() {
-        try {
-            if(isNaN(stitchCount) || isNaN(orgWidth) || isNaN(desWidth)) {
-                throw new Error("The input is invalid or incomplete.");
-            }
-        } catch (error) {
-            console.error("Error:", error.message);
-            alert(error.message);
-            window.location.href = "index.html"; // Redirects to index.html
+        // Validate input
+        if (
+            isNaN(stCount) || isNaN(oWidth) || isNaN(dWidth) ||
+            stCount <= 0 || oWidth <= 0 || dWidth <= 0
+        ) {
+            throw new Error("Please enter valid numbers in all fields.");
         }
-    }
 
-    // output
-    document.body.innerHTML =
-    validateInput();
-    `
-        <div id="container">
-            <p> You should cast on <strong>${newStitchCount}</strong> stitches! </p>
-            <button onclick="location.reload()"> Go back </button>
-        </div>
-    `;
+        // Calculate
+        const stPerCM = stCount / oWidth;
+        const newStitchCount = Math.round(stPerCM * dWidth);
+
+        // Output result
+        document.body.innerHTML = `
+            <div id="container">
+                <p>You should cast on <strong>${newStitchCount}</strong> stitches!</p>
+                <button onclick="location.href='index.html'">Go back</button>
+            </div>
+        `;
+
+    } catch (error) {
+        alert(error.message);
+        window.location.href = "index.html";
+    }
 });
