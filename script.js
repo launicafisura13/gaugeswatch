@@ -13,8 +13,23 @@ document.getElementById('submit').addEventListener('click', () => {
     const stPerCM = stCount / oWidth;
     const newStitchCount = Math.round(stPerCM * dWidth);
 
+    // check for invalid input
+    function validateInput() {
+        try {
+            if(isNaN(stitchCount) || isNaN(orgWidth) || isNaN(desWidth)) {
+                throw new Error("The input is invalid or incomplete.");
+            }
+        } catch (error) {
+            console.error("Error:", error.message);
+            alert(error.message);
+            window.location.href = "index.html"; // Redirects to index.html
+        }
+    }
+
     // output
-    document.body.innerHTML = `
+    document.body.innerHTML =
+    validateInput();
+    `
         <div id="container">
             <p> You should cast on <strong>${newStitchCount}</strong> stitches! </p>
             <button onclick="location.reload()"> Go back </button>
