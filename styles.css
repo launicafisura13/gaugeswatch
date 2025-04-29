@@ -15,10 +15,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #fff5f8, #fbd6e2, #f5aac2, #ffd6e8);
+    min-height: 100vh;
+    background: linear-gradient(120deg, #fff5f8, #fbd6e2, #f5aac2, #ffd6e8);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
+    overflow: hidden; /* prevents scroll bar unless absolutely needed */
 }
 
 @keyframes gradient {
@@ -62,4 +63,3 @@ button:hover {
 
 label { display: inline-block; width: 140px; text-align: right; }
 input { display : inline-block; width: 60px; text-align: right;}
-
