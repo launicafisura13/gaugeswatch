@@ -32,6 +32,6 @@ document.getElementById('submit').addEventListener('click', () => {
 
     } catch (error) {
         alert(error.message);
-        window.location.href = "/gaugeswatch/";
+        window.location.href = "https://launicafisura13.github.io/gaugeswatch/";
     }
 });
