@@ -1,49 +1,35 @@
 // Get elements
-const desLength = document.getElementById('desLength');
-const len = document.getElementById('length');
-const pr = document.getElementById('price');
+const stitchCount = document.getElementById('stitchCount');
+const orgWidth = document.getElementById('orgWidth');
+const desWidth = document.getElementById('desWidth');
 
 document.getElementById('submit').addEventListener('click', () => {
     try {
         // Convert input values to numbers
-        const dLength = Number(desLength.value);
-        const length = Number(len.value);
-        const price = Number(pr.value);
+        const stCount = Number(stitchCount.value);
+        const oWidth = Number(orgWidth.value);
+        const dWidth = Number(desWidth.value);
 
-        // Validate required inputs
+        // Validate input
         if (
-            isNaN(dLength) || isNaN(length) ||
-            dLength <= 0 || length <= 0
+            isNaN(stCount) || isNaN(oWidth) || isNaN(dWidth) ||
+            stCount <= 0 || oWidth <= 0 || dWidth <= 0
         ) {
             throw new Error("Please enter valid numbers in all fields.");
         }
 
-        // Calculate yarn balls needed
-        let yarnBalls = dLength / length;
-        yarnBalls = Math.round(yarnBalls * 2) / 2;
+        // Calculate
+        const stPerCM = stCount / oWidth;
+        const newStitchCount = Math.round(stPerCM * dWidth);
 
-        // Start building result HTML
-        let resultHTML = `
-            <p>You will need approximately <strong>${yarnBalls}</strong> skeins of yarn!</p> <br>
-            <p>Estimated cost: $<strong>${cost.toFixed(2)}</strong></p> <br>
-            <button onclick="location.reload()">Try Again</button>
+        const container = document.getElementById("container");
+        container.innerHTML = `
+            <p>You should cast on <strong>${newStitchCount}</strong> stitches!</p>
+            <button onclick="location.href='index.html'">Go back</button>
         `;
-        document.getElementById("container").innerHTML = resultHTML;
-
-
-        // Only show full price if price was entered and valid
-        if (!isNaN(price) && pr.value.trim() !== "") {
-            const fullPrice = price * Math.round(yarnBalls);
-            resultHTML += `<p>The full price is <strong>${fullPrice.toFixed(2)}€</strong>.</p>`;
-        }
-
-        resultHTML += `<button onclick="location.href='index.html'">Go back</button></div>`;
-
-        // Output result
-        document.body.innerHTML = resultHTML;
 
     } catch (error) {
         alert(error.message);
-        window.location.href = "https://launicafisura13.github.io/yarncalc";
+        window.location.href = "https://launicafisura13.github.io/gaugeswatch/";
     }
 });
